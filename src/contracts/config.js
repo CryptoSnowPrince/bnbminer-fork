@@ -16,7 +16,7 @@ const config = {
     97: "0x61",
   },
   INFURA_ID: "9f08884ad87343d89b817b96e19e5808",
-  chainID: 56,
+  chainID: 97,
 };
 
 export default config;

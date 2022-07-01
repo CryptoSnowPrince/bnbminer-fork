@@ -87,10 +87,16 @@ function App() {
       const provider = await web3Modal.connect();
       if (window.ethereum) {
         // check if the chain to connect to is installed
-        await window.ethereum.request({
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: config.chainHexID[config.chainID] }], // chainId must be in hexadecimal numbers
-        });
+        if ((await new providers.Web3Provider(provider).getNetwork()).chainId !== config.chainID) {
+          try {
+            await window.ethereum.request({
+              method: "wallet_switchEthereumChain",
+              params: [{ chainId: config.chainHexID[config.chainID] }], // chainId must be in hexadecimal numbers
+            });
+          } catch (error) {
+            console.log("network switching error: ", error);
+          }
+        }
       } else {
         console.log(
           "MetaMask is not installed. Please consider installing it: https://metamask.io/download.html"
@@ -101,6 +107,11 @@ function App() {
       const signer = web3Provider.getSigner();
       const account = await signer.getAddress();
       const network = await web3Provider.getNetwork();
+
+      if (network.chainId !== config.chainID) {
+        alert(`Switch network to BSC Mainnet on your wallet!`);
+        return;
+      }
 
       const show_address =
         account.slice(0, 5) + "..." + account.slice(-4, account.length);
@@ -117,15 +128,17 @@ function App() {
     } catch (error) {
       if (error.code === 4902) {
         try {
-          await window.ethereum.request({
-            method: "wallet_addEthereumChain",
-            params: [
-              {
-                chainId: config.chainHexID[config.chainID],
-                rpcUrl: config.RpcURL[config.chainID],
-              },
-            ],
-          });
+          if (window.ethereum) {
+            await window.ethereum.request({
+              method: "wallet_addEthereumChain",
+              params: [
+                {
+                  chainId: config.chainHexID[config.chainID],
+                  rpcUrl: config.RpcURL[config.chainID],
+                },
+              ],
+            });
+          }
         } catch (addError) {
           console.log(addError);
         }
