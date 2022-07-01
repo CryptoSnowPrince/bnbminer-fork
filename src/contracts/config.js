@@ -3,10 +3,6 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const config = {
-  AnchorEarnBSC: {
-    56: "0x0EA7C4c6A230e091e930b0E6fD9D5c18a6699Cbc",
-    97: "0x80de92df50F270e49bb4E269502D00cAB753A55a",
-  },
   BlockExplorerURL: {
     56: "https://bscscan.com",
     97: "https://testnet.bscscan.com",
