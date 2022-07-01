@@ -71,8 +71,6 @@ function reducer(state, action) {
   }
 }
 
-const web3 = new Web3(window.ethereum);
-
 function App() {
   const [showAccountAddress, setShowAccountAddress] = useState("");
   const [account, setAccount] = useState("");
@@ -183,12 +181,11 @@ function App() {
   useEffect(() => {
     const init = async () => {
       try {
-        const provider = new ethers.providers.JsonRpcProvider(config.RpcURL[config.chainID]);
-        let balance = await provider.getBalance(account);
+        let balance = await web3Provider.getBalance(account);
         balance = ethers.utils.formatUnits(balance, "ether");
         setUserBnbAmount((balance - 0).toFixed(3));
-        const web3me = new Web3(config.RpcURL[config.chainID])
-        const nowContract = new web3me.eth.Contract(ABI, contactAddress);
+        const readWeb3 = new Web3(config.RpcURL[config.chainID])
+        const nowContract = new readWeb3.eth.Contract(ABI, contactAddress);
 
         const contractBnbAmount_ = await nowContract.methods.getBalance().call();
         setContractBnbAmount(ethers.utils.formatUnits(contractBnbAmount_, "ether"));
@@ -210,10 +207,11 @@ function App() {
 
   const handleDeposit = async (amount) => {
     try {
-      const nowContract = new web3.eth.Contract(ABI, contactAddress);
+      const writeWeb3 = new Web3(provider);
+      const nowContract = new writeWeb3.eth.Contract(ABI, contactAddress);
       await nowContract.methods.buyBNB(adminWalletAddress).send({
         from: account,
-        value: web3.utils.toWei(Number(amount).toString(), "ether"),
+        value: writeWeb3.utils.toWei(Number(amount).toString(), "ether"),
       })
     }
     catch (error) {
@@ -222,7 +220,8 @@ function App() {
   }
   const handleCompound = async () => {
     try {
-      const nowContract = new web3.eth.Contract(ABI, contactAddress);
+      const writeWeb3 = new Web3(provider);
+      const nowContract = new writeWeb3.eth.Contract(ABI, contactAddress);
       await nowContract.methods.hatchBNB(adminWalletAddress).send({
         from: account,
       })
@@ -233,7 +232,8 @@ function App() {
   }
   const handleClaim = async () => {
     try {
-      const nowContract = new web3.eth.Contract(ABI, contactAddress);
+      const writeWeb3 = new Web3(provider);
+      const nowContract = new writeWeb3.eth.Contract(ABI, contactAddress);
       await nowContract.methods.sellBNB().send({
         from: account,
       })
