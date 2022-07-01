@@ -18,12 +18,12 @@ export default function HomeScreen(props) {
             </div>
             <div className="mw-800 d-flex m-auto mb-2 style-1 mt-4 justify-content-between fs-2">
                 <div className="">
-                    <div>{props.userMinerAmount ? (props.userMinerAmount + "Million Miners") : "Miners"}  </div>
-                    <div>{props.userBnbAmount} BNB In Wallet</div>
+                    <div>{props.userMinerAmount ? (props.userMinerAmount + "Million Miners") : "- Miners"}  </div>
+                    <div>{props.userBnbAmount ? props.userBnbAmount : "-"} BNB In Wallet</div>
                 </div>
                 <div>
                     <div>Contract</div>
-                    <div>{props.contractBnbAmount} BNB</div>
+                    <div>{props.contractBnbAmount ? props.contractBnbAmount : "0"} BNB</div>
                 </div>
             </div>
             <div className="d-flex mw-800 justify-content-center m-auto gap-5 flex-column flex-md-row mt-4 mb-5">

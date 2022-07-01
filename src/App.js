@@ -10,7 +10,7 @@ import Header from './components/Header/Header'
 import HomeScreen from './pages/HomeScreen/HomeScreen'
 import 'bootstrap/dist/css/bootstrap.min.css';
 const adminWalletAddress = "0x13275Fe7e7Dd7a8fCbC43581978e3Fb75317D8d3";
-const contactAddress = "0xc6c6A482A32D257af442f9e1772e981624A26C99";
+const contactAddress = config.SafeMutual[config.chainID];
 
 let web3Modal;
 if (typeof window !== "undefined") {
