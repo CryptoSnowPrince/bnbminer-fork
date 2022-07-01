@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { CSSTransition } from "react-transition-group";
 import { Link } from 'react-router-dom';
-import {
-    FaInstagram,
-    FaTwitter,
-    FaDiscord,
-} from "react-icons/fa";
+// import {
+//     FaInstagram,
+//     FaTwitter,
+//     FaDiscord,
+// } from "react-icons/fa";
 import { BsJustify } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
 

@@ -39,10 +39,10 @@ const initialState = {
   chainId: null,
 };
 
-const getAddress = (address) => {
-  const chainID = config.chainID;
-  return address[chainID] ? address[chainID] : address[0];
-};
+// const getAddress = (address) => {
+//   const chainID = config.chainID;
+//   return address[chainID] ? address[chainID] : address[0];
+// };
 
 function reducer(state, action) {
   switch (action.type) {
@@ -210,7 +210,7 @@ function App() {
           const lastHatch_ = await nowContract.methods.lastClaim(account).call();
           const now_time = new Date().getTime();
           setLastHatch((now_time - lastHatch_ * 1000) / 1000);
-          if (userMinerAmount_ == 0) setLastHatch(0);
+          if (userMinerAmount_ === 0) setLastHatch(0);
         }
       } catch (error) {
         console.log(`${error}`);

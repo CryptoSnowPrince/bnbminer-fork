@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import gif from "../../assets/New-450-Day-Website 425x133-banner.gif"
-import {
-    FaInstagram,
-    FaTwitter,
-    FaDiscord,
-} from "react-icons/fa";
+// import gif from "../../assets/New-450-Day-Website 425x133-banner.gif"
+// import {
+//     FaInstagram,
+//     FaTwitter,
+//     FaDiscord,
+// } from "react-icons/fa";
 import ProgressBar from "@ramonak/react-progress-bar";
 
 export default function HomeScreen(props) {
-    console.log(props.lastHatch)
+    // console.log(props.lastHatch)
     const [depositAmount, setDepositAmount] = useState(0);
     return (
         <div className="mt-80 mb-4">
