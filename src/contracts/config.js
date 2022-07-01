@@ -5,7 +5,7 @@ dotenv.config();
 const config = {
   SafeMutual: {
     56: "0xc6c6A482A32D257af442f9e1772e981624A26C99", // Mainnet
-    97: "0xc6c6A482A32D257af442f9e1772e981624A26C99", // Testnet
+    97: "0xc6c6A482A32D257af442f9e1772e981624A26C99", // Testnet //Not verified
   },
   BlockExplorerURL: {
     56: "https://bscscan.com",
