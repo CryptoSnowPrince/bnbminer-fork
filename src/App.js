@@ -217,7 +217,7 @@ function App() {
       }
     }
     init();
-  }, [account]);
+  }, [account, web3Provider]);
 
   const handleDeposit = async (amount) => {
     try {
