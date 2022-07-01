@@ -194,23 +194,24 @@ function App() {
   useEffect(() => {
     const init = async () => {
       try {
-        let balance = await web3Provider.getBalance(account);
-        balance = ethers.utils.formatUnits(balance, "ether");
-        setUserBnbAmount((balance - 0).toFixed(3));
         const readWeb3 = new Web3(config.RpcURL[config.chainID])
         const nowContract = new readWeb3.eth.Contract(ABI, contactAddress);
 
         const contractBnbAmount_ = await nowContract.methods.getBalance().call();
         setContractBnbAmount(ethers.utils.formatUnits(contractBnbAmount_, "ether"));
 
-        const userMinerAmount_ = await nowContract.methods.accountMiners(account).call();
-        setUserMinerAmount(userMinerAmount_ / 10000);
+        if (web3Provider && readWeb3.utils.isAddress(account)) {
+          let balance = await web3Provider.getBalance(account);
+          balance = ethers.utils.formatUnits(balance, "ether");
+          setUserBnbAmount((balance - 0).toFixed(3));
+          const userMinerAmount_ = await nowContract.methods.accountMiners(account).call();
+          setUserMinerAmount(userMinerAmount_ / 10000);
 
-        const lastHatch_ = await nowContract.methods.lastClaim(account).call();
-        const now_time = new Date().getTime();
-        setLastHatch((now_time - lastHatch_ * 1000) / 1000);
-        if (userMinerAmount_ == 0) setLastHatch(0);
-
+          const lastHatch_ = await nowContract.methods.lastClaim(account).call();
+          const now_time = new Date().getTime();
+          setLastHatch((now_time - lastHatch_ * 1000) / 1000);
+          if (userMinerAmount_ == 0) setLastHatch(0);
+        }
       } catch (error) {
         console.log(`${error}`);
       }
