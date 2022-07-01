@@ -12,7 +12,7 @@ const config = {
     97: "https://testnet.bscscan.com",
   },
   RpcURL: {
-    56: "https://bsc-dataseed1.defibit.io/",
+    56: "https://speedy-nodes-nyc.moralis.io/03eb35954a0b7ed092444a8e/bsc/mainnet",
     97: "https://speedy-nodes-nyc.moralis.io/03eb35954a0b7ed092444a8e/bsc/testnet",
   },
   chainHexID: {
